@@ -1,3 +1,3 @@
 # iOS-Restriction-Key-Cracker
 
-This tool crackes an iOS devices restrictions passcode for any iOS between 7 and 11. It is Windows only and a backup of the device must be made using iTunes first.
+This tool crackes an iOS devices restrictions passcode for any iOS between 7 and 11. Requires iTunes and a device backup to be made. Windows and Mac support.
