@@ -15,7 +15,7 @@ def returnPlistString(path, searchString, linesBelow):
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
                     return linecache.getline(path,num + linesBelow)
-    else:   # Mac has to different...
+    else:   # Mac has to be different...
         foundLine = 0
         with open(os.path.expanduser(path)) as devicePlist:
             for num, line in enumerate(devicePlist, 1):
