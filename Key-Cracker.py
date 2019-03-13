@@ -15,7 +15,7 @@ def returnPlistString(path, searchString, linesBelow):
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
                     return linecache.getline(path,num + linesBelow)
-    else:   # Mac has to be different...
+    else:   # Mac has to different...
         foundLine = 0
         with open(os.path.expanduser(path)) as devicePlist:
             for num, line in enumerate(devicePlist, 1):
@@ -41,8 +41,7 @@ def crackRestrictionsKey(base64Hash, base64Salt):
 
 # Get OS and set backup path based on it
 operatingSystem = os.name
-print "Operating System: %s" % operatingSystem
-if operatingSystem == "nt":
+if operatingSystem == "Windows":
     windows = True
     windowsUser = os.path.expanduser('~').split("\\")[2]
     print "[+] User: %s " % windowsUser
@@ -102,14 +101,18 @@ if windows == True:
 else:
     deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][3] + "/39/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 try:
-    deviceRestrictionsKey = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordKey", 2).strip()
-    deviceRestrictionsSalt = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordSalt", 2).strip()
+    deviceRestrictionsKey = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordKey", 2)
+    deviceRestrictionsSalt = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordSalt", 2)
 except IOError:
     print "[-] Device chosen does not have a restrictions key set"
     exit()
 
+if (deviceRestrictionsKey == None) or (deviceRestrictionsSalt == None):
+    print "[-] Device had a restrictions key set at one point, but not at the time of backup."
+    exit()
+
 if (deviceRestrictionsKey == "") or (deviceRestrictionsSalt == "19"):
-    print "[-] Error retrieving hash or salt."
+    print "[-] Unknown error retrieving hash or salt from file."
     exit()
 
 # Crack it
