@@ -41,7 +41,7 @@ def crackRestrictionsKey(base64Hash, base64Salt):
 
 # Get OS and set backup path based on it
 operatingSystem = os.name
-if operatingSystem == "Windows":
+if operatingSystem == "nt":
     windows = True
     windowsUser = os.path.expanduser('~').split("\\")[2]
     print "[+] User: %s " % windowsUser
