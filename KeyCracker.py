@@ -116,7 +116,7 @@ if (deviceRestrictionsKey == "") or (deviceRestrictionsSalt == "19"):
     exit()
 
 # Crack it
-print "[+] Hash: %s \n[+] Salt: %s" % (deviceRestrictionsKey, deviceRestrictionsSalt)
+print "\n[+] Hash: %s\n[+] Salt: %s" % (deviceRestrictionsKey.strip(), deviceRestrictionsSalt.strip())
 print "\n[*] Bruteforcing key..."
 deviceKey = crackRestrictionsKey(deviceRestrictionsKey, deviceRestrictionsSalt)
 if not deviceKey:
