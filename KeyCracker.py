@@ -81,7 +81,7 @@ print "\n[+] Device Backups:\n"
 for item, deviceData in devices.iteritems():
     print "%d: %s (%s) - %s" % (item, deviceData[0], deviceData[2], deviceData[1])
 
-# Let the user enter a coice
+# Let the user enter a choice
 length = len(devices)
 userChoice = int(raw_input("Backup: "))
 if (userChoice < 1) or (userChoice > length):
