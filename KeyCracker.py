@@ -7,6 +7,8 @@ from time import time
 from passlib.utils.pbkdf2 import pbkdf2  # pip install pbkdf2, pip install passlib
 windows = False
 devices = {}
+deviceRestrictionsKey = ""
+deviceRestrictionsSalt = ""
 
 # Search a device plist and return a line
 def returnPlistString(path, searchString, linesBelow):
@@ -95,8 +97,8 @@ if (int(devices[userChoice][2][:2].strip(".")) < 7) or (int(devices[userChoice][
 
 print "\n[+] Device: %s - %s [%s] (%s)" % (devices[userChoice][0], devices[userChoice][1], devices[userChoice][2], devices[userChoice][3])
 
-# Get the hash and salt from the appropriate file for the apropriate system
-if windows == True:
+# Get the hash and salt from the appropriate file for the appropriate system
+if windows is True:
     deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\39\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 else:
     deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][3] + "/39/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
@@ -107,7 +109,7 @@ except IOError:
     print "[-] Device chosen does not have a restrictions key set"
     exit()
 
-if (deviceRestrictionsKey == None) or (deviceRestrictionsSalt == None):
+if (deviceRestrictionsKey is None) or (deviceRestrictionsSalt is None):
     print "[-] Device had a restrictions key set at one point, but not at the time of backup."
     exit()
 
