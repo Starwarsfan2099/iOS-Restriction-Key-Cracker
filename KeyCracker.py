@@ -12,7 +12,7 @@ deviceRestrictionsSalt = ""
 
 # Search a device plist and return a line
 def returnPlistString(path, searchString, linesBelow):
-    if windows == True:
+    if windows is True:
         with open(path) as devicePlist:
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
@@ -23,7 +23,7 @@ def returnPlistString(path, searchString, linesBelow):
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
                     foundLine = num + 1
-                if num == foundLine:
+                if num is foundLine:
                     return line
 
 # Crack the restrictions key
@@ -34,7 +34,7 @@ def crackRestrictionsKey(base64Hash, base64Salt):
     for i in range(10000):
         key = "%04d" % (i)
         out = pbkdf2(key, salt, 1000)
-        if out == secret:
+        if out is secret:
             print "[+] Passcode: ", key
             duration = time() - startTime
             print "[*] %f seconds" % (duration)
@@ -43,7 +43,7 @@ def crackRestrictionsKey(base64Hash, base64Salt):
 
 # Get OS and set backup path based on it
 operatingSystem = os.name
-if operatingSystem == "nt":
+if operatingSystem is "nt":
     windows = True
     windowsUser = os.path.expanduser('~').split("\\")[2]
     print "[+] User: %s " % windowsUser
@@ -60,7 +60,7 @@ print "[+] Generating list of valid backups..."
 item = 1
 for backup in backups:
     try:
-        if windows == True:
+        if windows is True:
             backupDevice = backup + "Info.plist"
             deviceID = backupDevice.split("\\")[8]
         else:
