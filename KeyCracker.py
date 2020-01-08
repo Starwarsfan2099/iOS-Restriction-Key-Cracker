@@ -16,7 +16,7 @@ def returnPlistString(path, searchString, linesBelow):
         with open(path) as devicePlist:
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
-                    return linecache.getline(path,num + linesBelow)
+                    return linecache.getline(path, num + linesBelow)
     else:   # Mac has to different...
         foundLine = 0
         with open(os.path.expanduser(path)) as devicePlist:
@@ -32,18 +32,17 @@ def crackRestrictionsKey(base64Hash, base64Salt):
     salt = base64.b64decode(base64Salt)
     startTime = time()
     for i in range(10000):
-        key = "%04d" % (i)
+        key = "%04d" % i
         out = pbkdf2(key, salt, 1000)
-        if out is secret:
-            print "[+] Passcode: ", key
+        if out == secret:
+            print "[+] Passcode: %s" % key
             duration = time() - startTime
-            print "[*] %f seconds" % (duration)
+            print "[*] %f seconds" % duration
             return key
     return False
 
 # Get OS and set backup path based on it
-operatingSystem = os.name
-if operatingSystem is "nt":
+if os.name is "nt":
     windows = True
     windowsUser = os.path.expanduser('~').split("\\")[2]
     print "[+] User: %s " % windowsUser
@@ -120,7 +119,7 @@ if (deviceRestrictionsKey == "") or (deviceRestrictionsSalt == "19"):
 # Crack it
 print "\n[+] Hash: %s\n[+] Salt: %s" % (deviceRestrictionsKey.strip(), deviceRestrictionsSalt.strip())
 print "\n[*] Bruteforcing key..."
-deviceKey = crackRestrictionsKey(deviceRestrictionsKey, deviceRestrictionsSalt)
+deviceKey = crackRestrictionsKey(deviceRestrictionsKey.strip(), deviceRestrictionsSalt.strip())
 if not deviceKey:
     print "[-] Unknown error, key not found"
     exit()
