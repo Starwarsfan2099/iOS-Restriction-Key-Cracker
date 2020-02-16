@@ -23,7 +23,7 @@ def returnPlistString(path, searchString, linesBelow):
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
                     foundLine = num + 1
-                if num is foundLine:
+                if num == foundLine:
                     return line
 
 # Crack the restrictions key
