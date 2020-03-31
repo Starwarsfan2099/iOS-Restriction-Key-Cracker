@@ -91,7 +91,7 @@ if (userChoice < 1) or (userChoice > length):
 
 # Check iOS version
 if (int(devices[userChoice][2][:2].strip(".")) < 7) or (int(devices[userChoice][2][:2].strip(".")) >= 12):
-    print "[-] This program is not compatible with iOS %s" % devices[userChoice][2]
+    print "\n[-] This program is not compatible with iOS %s" % devices[userChoice][2]
     exit()
 
 print "\n[+] Device: %s - %s [%s] (%s)" % (devices[userChoice][0], devices[userChoice][1], devices[userChoice][2], devices[userChoice][3])
