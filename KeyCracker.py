@@ -98,7 +98,10 @@ print "\n[+] Device: %s - %s [%s] (%s)" % (devices[userChoice][0], devices[userC
 
 # Get the hash and salt from the appropriate file for the appropriate system
 if windows is True:
-    deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\39\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
+    if os.path.isfile(backupPath + "\\" + devices[userChoice][3] + "\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"):
+        deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
+    else:
+        deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\39\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 else:
     deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][3] + "/39/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 try:
