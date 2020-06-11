@@ -97,13 +97,17 @@ if (int(devices[userChoice][2][:2].strip(".")) < 7) or (int(devices[userChoice][
 print "\n[+] Device: %s - %s [%s] (%s)" % (devices[userChoice][0], devices[userChoice][1], devices[userChoice][2], devices[userChoice][3])
 
 # Get the hash and salt from the appropriate file for the appropriate system
-if windows is True:
+if windows is True:     # Windows
     if os.path.isfile(backupPath + "\\" + devices[userChoice][3] + "\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"):
         deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
     else:
         deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\39\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
-else:
-    deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][3] + "/39/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
+else:                   # Mac
+    if os.path.isfile(backupPath + "/" + devices[userChoice][3] + "/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"):
+        deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][3] + "/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
+    else:
+        deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][
+            3] + "\\39\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 try:
     deviceRestrictionsKey = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordKey", 2)
     deviceRestrictionsSalt = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordSalt", 2)
