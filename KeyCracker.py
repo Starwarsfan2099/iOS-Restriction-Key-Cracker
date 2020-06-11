@@ -22,7 +22,7 @@ def returnPlistString(path, searchString, linesBelow):
         with open(os.path.expanduser(path)) as devicePlist:
             for num, line in enumerate(devicePlist, 1):
                 if searchString in line:
-                    foundLine = num + 1
+                    foundLine = num + linesBelow
                 if num == foundLine:
                     return line
 
@@ -103,11 +103,10 @@ if windows is True:     # Windows
     else:
         deviceRestrictionsPlist = backupPath + "\\" + devices[userChoice][3] + "\\39\\398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 else:                   # Mac
-    if os.path.isfile(backupPath + "/" + devices[userChoice][3] + "/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"):
-        deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][3] + "/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
+    if os.path.isfile(os.path.expanduser(backupPath + devices[userChoice][3] + "/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b")):
+        deviceRestrictionsPlist = backupPath + devices[userChoice][3] + "/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
     else:
-        deviceRestrictionsPlist = backupPath + "/" + devices[userChoice][
-            3] + "/39/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
+        deviceRestrictionsPlist = backupPath + devices[userChoice][3] + "/39/398bc9c2aeeab4cb0c12ada0f52eea12cf14f40b"
 try:
     deviceRestrictionsKey = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordKey", 2)
     deviceRestrictionsSalt = returnPlistString(deviceRestrictionsPlist, "RestrictionsPasswordSalt", 2)
